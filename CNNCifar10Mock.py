@@ -4,9 +4,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf 
 import keras
-from keras import utils
-import itertools #libary für das arbeiten mit iterativen Prozessen.
-#ziel gpu mit einbauen um training und plotten zu beschleunigen, mit einbauen in Ausarbeitung technische Herausforderungen oder als Unterpunkt in technische Optimierung
 
 #tensorflow mit gpu installiert
 print("GPU verfügbar:", tf.config.list_physical_devices('GPU'))
@@ -64,7 +61,6 @@ x_train, x_valid, y_train, y_valid = train_test_split(x_train, y_train, test_siz
 
 #3.modellaufbau und training
 from keras import Sequential,layers, optimizers
-from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization
 from keras import regularizers
 
 INPUT_SHAPE = (32, 32, 3) 
@@ -72,19 +68,24 @@ KERNEL_SIZE = (3, 3)
 
 #relu verwendet um nichtlinearität zu erzeugen für cnn.
 #ReLU ist effizient und verhindert das Verschwinden des Gradienten, wodurch tiefe Netzwerke besser trainiert werden können.
-#convolutional layer, chatgpt hat den bereinigt chatgpt verwendung als Sparringspartner und hilfe für technische Fragen
+#convolutional layer
 model = Sequential([
-    Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)),
-    BatchNormalization(),
-    MaxPooling2D((2, 2)),
-    Conv2D(32, (3, 3), activation='relu'),
-    BatchNormalization(),
-    MaxPooling2D((2, 2)),   #2x2 Matrix zur verkleinerung, spart an rechenleistung
-    Conv2D(32, (3, 3), activation='relu'),
-    Flatten(), #Konvertiert die 2D-Ausgabe (Feature Maps) der vorherigen Schicht in einen eindimensionalen Vektor. Dies ist notwendig, um die Daten an vollständig verbundene Schichten (Dense Layers) weiterzugeben.
-    Dense(64, activation='relu'),         #64 Neuronen in der versteckten Schicht
-    Dropout(0.5),                    #dropout verbessert die test accuracy um 0.17 bei unserem code, hilft gegen overfitting entfernt 50% der neuronen, Teil von 5. Hyperparameter
-    Dense(10, activation='softmax')  # 10 Klassen für CIFAR-10, softmax 
+    keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)),
+    keras.layers.BatchNormalization(),
+    keras.layers.MaxPooling2D((2, 2)),
+
+    keras.layers.Conv2D(64, (3, 3), activation='relu'),
+    keras.layers.BatchNormalization(),
+    keras.layers.MaxPooling2D((2, 2)),   #2x2 Matrix zur verkleinerung, spart an rechenleistung
+    
+    keras.layers.Conv2D(128, (3, 3), activation='relu'),
+    keras.layers.BatchNormalization(),
+    keras.layers.MaxPooling2D((2, 2)),
+
+    keras.layers.Flatten(), #Konvertiert die 2D-Ausgabe (Feature Maps) der vorherigen Schicht in einen eindimensionalen Vektor. Dies ist notwendig, um die Daten an vollständig verbundene Schichten (Dense Layers) weiterzugeben.
+    keras.layers.Dense(64, activation='relu'),         #64 Neuronen in der versteckten Schicht
+    keras.layers.Dropout(0.5),                    #dropout verbessert die test accuracy um 0.17 bei unserem code, hilft gegen overfitting entfernt 50% der neuronen, Teil von 5. Hyperparameter
+    keras.layers.Dense(10, activation='softmax')  # 10 Klassen für CIFAR-10, softmax 
 ])
 
 # Compiling the model 
