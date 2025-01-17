@@ -49,7 +49,7 @@ jobs:
         run: |
           echo "Checking contents of the directory"
           pwd /Users/knutvietthangfranke/Documents/python pipeline
-          ls -R data
+          ls -R data 
    
 
       - name: Save generated plot
