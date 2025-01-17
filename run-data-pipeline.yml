@@ -28,9 +28,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run CNNCifar10Mock.py
+      - name: modell training
         run: |
           python CNNCifar10Mock.py
+
+    - name: Überprüfen des Verzeichnisses
+      run: |
+        echo "Checking contents of the directory"
+        ls -R data
 
       - name: check for changes
         run: |
@@ -45,10 +50,6 @@ jobs:
           git commit -m "update data hyperparameters"
           git push
 
-      - name: Modell trainieren
-        run: |
-          python CNNCifar10Mock.py
-          
       - name: Save generated plot
         uses: actions/upload-artifact@v3
         with:
