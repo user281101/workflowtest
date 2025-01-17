@@ -1,5 +1,5 @@
-import tensorflow;
-import matplotlib;
-import keras;
-import pandas;
-import numpy;
+tensorflow;
+matplotlib;
+keras;
+pandas;
+numpy;
