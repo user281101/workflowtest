@@ -11,7 +11,7 @@ if tf.config.list_physical_devices('GPU'):
     print("Training läuft auf GPU!")
 else:
     print("Keine GPU verfügbar. Training läuft auf CPU.")
-
+#
 #zuerst testdaten aufsplitten dann skalieren um datenlecks zu vermeiden 
 
 #testdatenaufteilung funktioniert
