@@ -156,9 +156,6 @@ for i, index in enumerate(misclassified_indices[:9]):
 plt.tight_layout()
 plt.show() 
 
-#aktuelles Problem: Katze, Reh Vogel Hund sind schwer zu unterscheiden für das Modell (Aufgabe5)
-#Lösungsansatz Hyperparameter-Tuning oder Data Augmentation mit integrieren
-
 #Niedrige Genauigkeit bei ähnlichen Klassen (z. B. Hund, Katze, Reh, Vogel) könnte verbessert werden durch:
 #Datenaugmentation,Erhöhung der Netzwerkkomplexität, Transfer Learning, Hyperparameter Tuning
 
