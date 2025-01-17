@@ -49,11 +49,11 @@ jobs:
         run: |
           echo "Checking contents of the directory"
 <<<<<<< HEAD
-          pwd /Users/knutvietthangfranke/Documents/python pipeline
+          pwd 
           ls -R  CNNCifar10Mock.py
 =======
           pwd 
-          ls -R  
+          ls -R .
 >>>>>>> a2d075d (debug geändert)
    
 
