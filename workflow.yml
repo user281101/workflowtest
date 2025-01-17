@@ -48,6 +48,7 @@ jobs:
       - name: debug
         run: |
           echo "Checking contents of the directory"
+          pwd /Users/knutvietthangfranke/Documents/python pipeline
           ls -R data
    
 
