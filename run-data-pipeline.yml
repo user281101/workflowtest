@@ -1,4 +1,4 @@
-name: workflow
+name: run-data-pipeline
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: start message
-        run: echo "Starting workflow"
+        run: echo "Starting run-data-pipeline"
         
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -48,8 +48,13 @@ jobs:
       - name: debug
         run: |
           echo "Checking contents of the directory"
+<<<<<<< HEAD
           pwd /Users/knutvietthangfranke/Documents/python pipeline
           ls -R  CNNCifar10Mock.py
+=======
+          pwd 
+          ls -R  
+>>>>>>> a2d075d (debug geändert)
    
 
       - name: Save generated plot
