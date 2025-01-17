@@ -120,11 +120,9 @@ plt.show()
 print("y_test:", y_test)
 print("y_pred:", y_pred)
 print("Klassifikationsbericht:")
-print(classification_report(y_test, y_pred, target_names=klassen)) #warum zeigt er mir den klassifikationsbericht so spät an
+print(classification_report(y_test, y_pred, target_names=klassen))
 
 #test accuracy zwischen 63-69 prozent aktuell
-#hund katze vogel reh noch niedrige Accuracy schauen wie man es erhöhen könnte
-
 #5 Hyperparameter Tuning
 
 #6 visualisieren der Ergebnisse
