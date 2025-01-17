@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: start message
-        run: echo "Starting data pipeline"
+        run: echo "Starting workflow"
         
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,9 +28,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run data pipeline
+      - name: Run CNNCifar10Mock.py
         run: |
-          python data_pipeline.py
+          python CNNCifar10Mock.py
 
       - name: check for changes
         run: |
