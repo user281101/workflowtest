@@ -45,18 +45,7 @@ jobs:
           git commit -m "update data hyperparameters"
           git push
 
-      - name: debug
-        run: |
-          echo "Checking contents of the directory"
-<<<<<<< HEAD
-          pwd 
-          ls -R  CNNCifar10Mock.py
-=======
-          pwd 
-          ls -R .
->>>>>>> a2d075d (debug geändert)
-   
-
+      
       - name: Save generated plot
         uses: actions/upload-artifact@v3
         with:
