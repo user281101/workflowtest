@@ -45,7 +45,10 @@ jobs:
           git commit -m "update data hyperparameters"
           git push
 
-      
+      - name: Modell trainieren
+        run: |
+          python train_model.py
+          
       - name: Save generated plot
         uses: actions/upload-artifact@v3
         with:
