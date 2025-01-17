@@ -47,7 +47,7 @@ jobs:
 
       - name: Modell trainieren
         run: |
-          python train_model.py
+          python CNNCifar10Mock.py
           
       - name: Save generated plot
         uses: actions/upload-artifact@v3
