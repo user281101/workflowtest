@@ -28,9 +28,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Debug current directory
+          run: |
+           echo "Current working directory is:"
+           pwd
+
+
       - name: modell training
         run: |
           python CNNCifar10Mock.py
+
+
 
     - name: Überprüfen des Verzeichnisses
       run: |
