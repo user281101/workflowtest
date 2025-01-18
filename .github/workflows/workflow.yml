@@ -30,6 +30,7 @@ jobs:
 
       - name: Run data pipeline
         run: |
+          cd data
           python CNNCifar10Mock.py
 
       - name: check for changes
