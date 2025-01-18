@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: start message
-        run: echo "Starting run-data-pipeline"
+        run: echo "Starting CNNCifar10Mock"
         
       - name: Checkout repository
         uses: actions/checkout@v4
