@@ -48,7 +48,7 @@ jobs:
       - name: debug
         run: |
           echo "Checking contetns of the directory"
-          ls -R data
+          ls -R data/CNNCifar10Mock.py
    
 
       - name: Save generated plot
