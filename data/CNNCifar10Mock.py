@@ -169,4 +169,4 @@ plt.show()
 #wenn nicht klappt einfach zu pipeline plan für morgen in bib: pipeline stark werden,abends ausarbeitung und it security
 
 #stand jetzt: Dataaugmentation und netzwerk komplexer zu machen haben nichts gebracht
-#transfer learning und hyperparameter tuning stehen noch aus##
+#transfer learning und hyperparameter tuning stehen noch aus###
