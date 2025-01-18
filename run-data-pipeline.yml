@@ -43,7 +43,7 @@ jobs:
     - name: Überprüfen des Verzeichnisses
       run: |
         echo "Checking contents of the directory"
-        ls -R data
+        ls -R CNNCifar10Mock.py
 
       - name: check for changes
         run: |
