@@ -61,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: generated-plot
-          path: data/plots/training_plots.png
+          path: data/plots/training_history.png
 
       - name: Save model
         uses: actions/upload-artifact@v3
