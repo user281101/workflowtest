@@ -43,8 +43,7 @@ jobs:
     - name: Überprüfen des Verzeichnisses
       run: |
         echo "Checking contents of the directory"
-        cd "/Users/knutvietthangfranke/Documents/python pipeline"
-        ls -R CNNCifar10Mock.py
+        ls -R data
 
       - name: check for changes
         run: |
