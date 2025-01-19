@@ -131,12 +131,12 @@ print("Klassifikationsbericht:")
 print(classification_report(y_test, y_pred, target_names=klassen))
 
 # Modell speichern
-def save_model(model, save_path = 'data/model/cnn/cnn_cifar10.h5'):
+def save_model(model, save_path = 'data/model/cnn_cifar10.h5'):
     os.makedirs(os.path.dirname(save_path),exist_ok=True)
     model.save(save_path)
     print("model saved at: {save_path}")
 
-save_model(model, 'data/model/cnn/cnn_cifar10.h5')
+save_model(model, 'data/model/cnn_cifar10.h5')
     
 # Trainingsgeschichte speichern
 history_path = os.path.join(RESULTS_DIR, 'training_history.txt')
