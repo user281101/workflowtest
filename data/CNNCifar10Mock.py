@@ -110,7 +110,6 @@ early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=3
 history = model.fit(x_train, y_train, epochs=10, batch_size=32, validation_data=(x_valid, y_valid), callbacks=[early_stopping])
 
 #4 Evaluieren und Konfusionsmatrix
-# Vorhersagen und Klassifikationsbericht einfügen
 from sklearn.metrics import ConfusionMatrixDisplay, classification_report, confusion_matrix
 
 #modell evaluieren
@@ -135,17 +134,13 @@ def save_model(model, save_path = 'data/model/cnn_cifar10.h5'):
     os.makedirs(os.path.dirname(save_path),exist_ok=True)
     model.save(save_path)
     print("model saved at: {save_path}")
-
 save_model(model, 'data/model/cnn_cifar10.h5')
-    
+
 # Trainingsgeschichte speichern
 history_path = os.path.join(RESULTS_DIR, 'training_history.txt')
 with open(history_path, 'w') as f:
     f.write(str(history.history))
 print(f"Trainingsgeschichte gespeichert unter: {history_path}")
-
-#test accuracy zwischen 63-69 prozent aktuell
-#5 Hyperparameter Tuning
 
 #6 visualisieren der Ergebnisse
 #Darstellung der Trainings- und Validierungsverluste sowie der Accuracy-Werte über die Trainingsperioden, speichert die plots als png datei
