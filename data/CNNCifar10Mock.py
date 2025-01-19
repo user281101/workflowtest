@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf 
 import keras
-import os
 
 #tensorflow mit gpu installiert
 print("GPU verfügbar:", tf.config.list_physical_devices('GPU'))
@@ -14,13 +13,6 @@ else:
     print("Keine GPU verfügbar. Training läuft auf CPU.")
 ##
 #zuerst testdaten aufsplitten dann skalieren um datenlecks zu vermeiden 
-
-# Ergebnisse speichern
-RESULTS_DIR = './results'
-PLOTS_DIR = os.path.join(RESULTS_DIR, 'plots')
-MODEL_DIR = os.path.join(RESULTS_DIR, 'saved_models')
-os.makedirs(PLOTS_DIR, exist_ok=True)
-os.makedirs(MODEL_DIR, exist_ok=True)
 
 #testdatenaufteilung funktioniert
 (x_train, y_train), (x_test, y_test) = keras.datasets.cifar10.load_data()
@@ -47,18 +39,9 @@ def visualize_cifar10_images(images, labels, class_names, num_images):
 visualize_cifar10_images(x_train, y_train, klassen, num_images=10)
 
 # Datenskalierung funktioniert
-x_train = x_train.astype('float32') #damit alle werte zwischen 0 und 1 sind
-x_test = x_test.astype('float32')
 x_train = x_train / 255.0
 x_test = x_test / 255.0
 
-# one hot encoding für prediction improving funktioniert
-import pandas as pd
-data = klassen
-df = pd.DataFrame(data)
-# Applying one-hot encoding und printen
-df_encoded = pd.get_dummies(df, dtype=int)
-print(df_encoded)
 
 #one hot encoding labels für nicht nötig gewesen dank SparseCategoricalCrossentropy
 #was macht SparseCategoricalCrossentropy?
@@ -78,18 +61,28 @@ KERNEL_SIZE = (3, 3)
 #ReLU ist effizient und verhindert das Verschwinden des Gradienten, wodurch tiefe Netzwerke besser trainiert werden können.
 #convolutional layer
 model = Sequential([
-    keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)),
+    #layer1
+    keras.layers.Conv2D(32, (3, 3), padding= 'same',activation='relu', input_shape=(32, 32, 3))
+    keras.layers.BatchNormalization(),
+    keras.layers.Conv2D(32, (3, 3), padding = 'same',activation = 'relu')
     keras.layers.BatchNormalization(),
     keras.layers.MaxPooling2D((2, 2)),
+    keras.layers.Dropout(0.3)
 
-    keras.layers.Conv2D(64, (3, 3), activation='relu'),
+    #layer2
+    keras.layers.Conv2D(64, (3, 3), padding = 'same', activation='relu'),
+    keras.layers.BatchNormalization(),
+    keras.layers.Conv2D(64, (3, 3), padding = 'same', activation='relu'),
     keras.layers.BatchNormalization(),
     keras.layers.MaxPooling2D((2, 2)),   #2x2 Matrix zur verkleinerung, spart an rechenleistung
+    keras.layers.Dropout(0.5)
     
+    #layer3
     keras.layers.Conv2D(128, (3, 3), activation='relu'),
     keras.layers.BatchNormalization(),
     keras.layers.MaxPooling2D((2, 2)),
 
+    #layer4
     keras.layers.Flatten(), #Konvertiert die 2D-Ausgabe (Feature Maps) der vorherigen Schicht in einen eindimensionalen Vektor. Dies ist notwendig, um die Daten an vollständig verbundene Schichten (Dense Layers) weiterzugeben.
     keras.layers.Dense(64, activation='relu'),         #64 Neuronen in der versteckten Schicht
     keras.layers.Dropout(0.5),                    #dropout verbessert die test accuracy um 0.17 bei unserem code, hilft gegen overfitting entfernt 50% der neuronen, Teil von 5. Hyperparameter
@@ -128,19 +121,6 @@ print("y_test:", y_test)
 print("y_pred:", y_pred)
 print("Klassifikationsbericht:")
 print(classification_report(y_test, y_pred, target_names=klassen))
-
-# Modell speichern
-def save_model(model, save_path = 'data/model/cnn_cifar10.h5'):
-    os.makedirs(os.path.dirname(save_path),exist_ok=True)
-    model.save(save_path)
-    print("model saved at: {save_path}")
-save_model(model, 'data/model/cnn_cifar10.h5')
-
-# Trainingsgeschichte speichern
-history_path = os.path.join(RESULTS_DIR, 'training_history.txt')
-with open(history_path, 'w') as f:
-    f.write(str(history.history))
-print(f"Trainingsgeschichte gespeichert unter: {history_path}")
 
 #6 visualisieren der Ergebnisse
 #Darstellung der Trainings- und Validierungsverluste sowie der Accuracy-Werte über die Trainingsperioden, speichert die plots als png datei
