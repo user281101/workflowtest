@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf 
 import keras
+import os
 
 #tensorflow mit gpu installiert
 print("GPU verfügbar:", tf.config.list_physical_devices('GPU'))
@@ -13,6 +14,13 @@ else:
     print("Keine GPU verfügbar. Training läuft auf CPU.")
 ##
 #zuerst testdaten aufsplitten dann skalieren um datenlecks zu vermeiden 
+
+# Ergebnisse speichern
+RESULTS_DIR = './results'
+PLOTS_DIR = os.path.join(RESULTS_DIR, 'plots')
+MODEL_DIR = os.path.join(RESULTS_DIR, 'saved_models')
+os.makedirs(PLOTS_DIR, exist_ok=True)
+os.makedirs(MODEL_DIR, exist_ok=True)
 
 #testdatenaufteilung funktioniert
 (x_train, y_train), (x_test, y_test) = keras.datasets.cifar10.load_data()
@@ -122,6 +130,20 @@ print("y_pred:", y_pred)
 print("Klassifikationsbericht:")
 print(classification_report(y_test, y_pred, target_names=klassen))
 
+# Modell speichern
+def save_model(model, save_path = 'data/model/cnn/cnn_cifar10.h5'):
+    os.makedirs(os.path.dirname(save_path),exist_ok=True)
+    model.save(save_path)
+    print("model saved at: {save_path}")
+
+save_model(model, 'data/model/cnn/cnn_cifar10.h5')
+    
+# Trainingsgeschichte speichern
+history_path = os.path.join(RESULTS_DIR, 'training_history.txt')
+with open(history_path, 'w') as f:
+    f.write(str(history.history))
+print(f"Trainingsgeschichte gespeichert unter: {history_path}")
+
 #test accuracy zwischen 63-69 prozent aktuell
 #5 Hyperparameter Tuning
 
@@ -155,18 +177,3 @@ for i, index in enumerate(misclassified_indices[:9]):
     plt.axis('off')
 plt.tight_layout()
 plt.show() 
-
-#Niedrige Genauigkeit bei ähnlichen Klassen (z. B. Hund, Katze, Reh, Vogel) könnte verbessert werden durch:
-#Datenaugmentation,Erhöhung der Netzwerkkomplexität, Transfer Learning, Hyperparameter Tuning
-
-#Dokumentation mit Hyperparameter-Tuning, Accuracy=?
-#verwendet: Batchnormalization, Droput gegen Overfitting
-
-#Datenaugmentation miteingebunden. keine höhere accuracy und training dauert deutlich länger
-#mögliche Lösungen:Netzwerk zu unkomplex, mit lernrate arbeiten, sanftere augmentation
-
-#netzwerk komplexer gemacht immernoch gleiche accuracy = 0.67
-#wenn nicht klappt einfach zu pipeline plan für morgen in bib: pipeline stark werden,abends ausarbeitung und it security
-
-#stand jetzt: Dataaugmentation und netzwerk komplexer zu machen haben nichts gebracht
-#transfer learning und hyperparameter tuning stehen noch aus####
