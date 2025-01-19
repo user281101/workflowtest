@@ -78,13 +78,17 @@ model = Sequential([
     keras.layers.Dropout(0.5),
     
     #layer3
-    keras.layers.Conv2D(128, (3, 3), activation='relu'),
+    keras.layers.Conv2D(128, (3, 3), padding = 'same',activation='relu'),
+    keras.layers.BatchNormalization(),
+    keras.layers.Conv2D(128, (3, 3), padding = 'same',activation='relu'),
     keras.layers.BatchNormalization(),
     keras.layers.MaxPooling2D((2, 2)),
+    keras.layers.Dropout(0.5),
 
     #layer4
     keras.layers.Flatten(), #Konvertiert die 2D-Ausgabe (Feature Maps) der vorherigen Schicht in einen eindimensionalen Vektor. Dies ist notwendig, um die Daten an vollständig verbundene Schichten (Dense Layers) weiterzugeben.
-    keras.layers.Dense(64, activation='relu'),         #64 Neuronen in der versteckten Schicht
+    keras.layers.Dense(128, activation='relu'),         #64 Neuronen in der versteckten Schicht
+    keras.layers.BatchNormalization(),
     keras.layers.Dropout(0.5),                    #dropout verbessert die test accuracy um 0.17 bei unserem code, hilft gegen overfitting entfernt 50% der neuronen, Teil von 5. Hyperparameter
     keras.layers.Dense(10, activation='softmax')  # 10 Klassen für CIFAR-10, softmax 
 ])
