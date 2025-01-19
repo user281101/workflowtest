@@ -66,5 +66,5 @@ jobs:
       - name: Save model
         uses: actions/upload-artifact@v3
         with:
-          name: model
+          name: model (test)
           path: data/model/cnn_cifar10.h5
