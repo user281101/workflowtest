@@ -62,12 +62,12 @@ KERNEL_SIZE = (3, 3)
 #convolutional layer
 model = Sequential([
     #layer1
-    keras.layers.Conv2D(32, (3, 3), padding= 'same',activation='relu', input_shape=(32, 32, 3))
+    keras.layers.Conv2D(32, (3, 3), padding= 'same',activation='relu', input_shape=(32, 32, 3)),
     keras.layers.BatchNormalization(),
-    keras.layers.Conv2D(32, (3, 3), padding = 'same',activation = 'relu')
+    keras.layers.Conv2D(32, (3, 3), padding = 'same',activation = 'relu'),
     keras.layers.BatchNormalization(),
     keras.layers.MaxPooling2D((2, 2)),
-    keras.layers.Dropout(0.3)
+    keras.layers.Dropout(0.3),
 
     #layer2
     keras.layers.Conv2D(64, (3, 3), padding = 'same', activation='relu'),
@@ -75,7 +75,7 @@ model = Sequential([
     keras.layers.Conv2D(64, (3, 3), padding = 'same', activation='relu'),
     keras.layers.BatchNormalization(),
     keras.layers.MaxPooling2D((2, 2)),   #2x2 Matrix zur verkleinerung, spart an rechenleistung
-    keras.layers.Dropout(0.5)
+    keras.layers.Dropout(0.5),
     
     #layer3
     keras.layers.Conv2D(128, (3, 3), activation='relu'),
