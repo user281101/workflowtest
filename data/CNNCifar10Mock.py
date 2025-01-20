@@ -60,6 +60,9 @@ KERNEL_SIZE = (3, 3)
 #relu verwendet um nichtlinearität zu erzeugen für cnn.
 #ReLU ist effizient und verhindert das Verschwinden des Gradienten, wodurch tiefe Netzwerke besser trainiert werden können.
 #convolutional layer
+
+#Hyperparameter: Komplexeres netz, anzahl neuronen pro schicht erhöht(besser für komplexe Beziehungen)
+
 model = Sequential([
     #layer1
     keras.layers.Conv2D(32, (3, 3), padding= 'same',activation='relu', input_shape=(32, 32, 3)),
@@ -104,7 +107,9 @@ model.compile(optimizer = 'adam',
 # Training the model for 10 epochs, validierungsdaten genutzt um Datenlecks zu vermeiden
 #loss minimum bei eopche 4, early stoppage toleriert 3 eopchen ohne verbesserung danach setback auf den niedrigsten loss wert
 early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
-history = model.fit(x_train, y_train, epochs=50, batch_size=64, validation_data=(x_valid, y_valid), callbacks=[early_stopping])
+history = model.fit(x_train, y_train, epochs=100, batch_size=64, validation_data=(x_valid, y_valid), callbacks=[early_stopping])
+
+#Hyperparameter: batchsize und epochen erhöht = höhere accuracy
 
 #4 Evaluieren und Konfusionsmatrix
 from sklearn.metrics import ConfusionMatrixDisplay, classification_report, confusion_matrix
