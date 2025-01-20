@@ -2,6 +2,7 @@ name: workflow
 
 on:
   push:
+  pull_request:
   workflow_dispatch:
   schedule:
     - cron: '0 9 * * *'
@@ -56,12 +57,17 @@ jobs:
           echo "Checking contetns of the directory"
           ls -R data/CNNCifar10Mock.py
    
-
       - name: Save generated plot
         uses: actions/upload-artifact@v3
         with:
           name: generated-plot
           path: data/plots/training_history.png
+
+      - name: Save confusion matrix as png
+        uses: actions/upload-artifact@v4
+        with:
+          name: confusion-matrix
+          path: data/plots/confusion_matrix.png
 
       - name: Save model
         uses: actions/upload-artifact@v3
