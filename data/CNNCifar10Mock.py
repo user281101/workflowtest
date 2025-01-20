@@ -108,7 +108,7 @@ model.compile(optimizer = 'adam',
 # Training the model for 10 epochs, validierungsdaten genutzt um Datenlecks zu vermeiden
 #loss minimum bei eopche 4, early stoppage toleriert 3 eopchen ohne verbesserung danach setback auf den niedrigsten loss wert
 early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
-history = model.fit(x_train, y_train, epochs=100, batch_size=64, validation_data=(x_valid, y_valid), callbacks=[early_stopping])
+history = model.fit(x_train, y_train, epochs = 10, batch_size=64, validation_data=(x_valid, y_valid), callbacks=[early_stopping])
 
 #Hyperparameter: batchsize und epochen erhöht = höhere accuracy
 
