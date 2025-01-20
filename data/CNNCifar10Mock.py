@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf 
 import keras
+import os
 
 #tensorflow mit gpu installiert
 print("GPU verfügbar:", tf.config.list_physical_devices('GPU'))
@@ -121,6 +122,14 @@ print(f"Test Accuracy: {test_acc:.2f}")
 # Vorhersagen generieren
 y_pred = np.argmax(model.predict(x_test), axis=-1)
 
+
+def plot_confusion_matrix(model, x_test, y_test, save_dir='data/plots'):
+    """Plot and save the confusion matrix."""
+# Save the plot
+    os.makedirs(save_dir, exist_ok=True)
+    plot_path = os.path.join(save_dir, 'confusion_matrix.png')
+    plt.savefig(plot_path)
+    plt.show()
 #konfusionsmatrix , zeigen wie gut das Modell die Klassen unterscheidet
 ConfusionMatrixDisplay.from_predictions(y_test.flatten(), y_pred, display_labels=klassen)
 plt.show()
