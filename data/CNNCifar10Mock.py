@@ -129,7 +129,7 @@ y_pred = np.argmax(model.predict(x_test), axis=-1)
 #plt.savefig("matrix_history.png")
 #plt.close()
 # Ensure the results directory exists
-output_dir = "data/result"
+output_dir = "data/plots"
 os.makedirs(output_dir, exist_ok=True)
 
 # Generate and save the confusion matrix
