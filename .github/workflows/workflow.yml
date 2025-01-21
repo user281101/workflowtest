@@ -61,16 +61,16 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: generated-plot
-          path: data/plots/training_history.png
+          path: data/results/plots/training_history.png
 
       - name: Save confusion matrix as png
         uses: actions/upload-artifact@v4
         with:
           name: confusion-matrix
-          path: data/plots/confusion_matrix.png
+          path: data/results/plots/confusion_matrix.png
 
       - name: Save model
         uses: actions/upload-artifact@v3
         with:
           name: model (test)
-          path: data/model/cnn_cifar10.h5
+          path: data/results/model/cnn_cifar10.h5
