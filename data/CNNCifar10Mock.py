@@ -38,6 +38,7 @@ def visualize_cifar10_images(images, labels, class_names, num_images):
         plt.axis('off') 
     plt.tight_layout() 
     plt.show()
+
 visualize_cifar10_images(x_train, y_train, klassen, num_images=10)
 
 # Datenskalierung funktioniert
