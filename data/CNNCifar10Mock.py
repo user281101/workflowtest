@@ -6,6 +6,7 @@ import tensorflow as tf
 import keras
 import os
 
+'Knut Viet Thang'
 #tensorflow mit gpu installiert
 print("GPU verfügbar:", tf.config.list_physical_devices('GPU'))
 if tf.config.list_physical_devices('GPU'):
@@ -20,13 +21,15 @@ else:
 print('Training set shape:', x_train.shape) #anzeigen der datenverteilung für die übersicht
 print('Test set shape:', x_test.shape)
 
+'Knut Viet Thang Franke'
 #visualisierung der Klassenverteilung zur Veranschaulichung
 klassen = ['Flugzeug','Auto','Vogel','Katze','Reh','Hund','Frosch','Pferd','Schiff','LKW']
 classes, counts = np.unique(y_train, return_counts=True)
 plt.barh(klassen, counts)
 plt.title('klassenverteilung im training set')
 
-#Visualisierungen der Bilder(Sollte am pro Klasse ein Exemplar sein) funktioniert
+'Neo Siemoneit 921770'
+#Visualisierungen der Bilder(Sollte am pro Klasse ein Exemplar sein) funktioniert 
 def visualize_cifar10_images(images, labels, class_names, num_images): 
     plt.figure(figsize=(10, 5)) 
     for i in range(num_images): 
@@ -45,7 +48,7 @@ x_test = x_test / 255.0
 
 
 #one hot encoding labels für nicht nötig gewesen dank SparseCategoricalCrossentropy
-#was macht SparseCategoricalCrossentropy?
+
 #validation trainingset zum schauen wie die predictions sind ohne testset anzurühren
 from sklearn.model_selection import train_test_split
 x_train, x_valid, y_train, y_valid = train_test_split(x_train, y_train, test_size=0.2, random_state = 42) #randomstate Datenaufteilung reproduzierbar
@@ -55,13 +58,14 @@ x_train, x_valid, y_train, y_valid = train_test_split(x_train, y_train, test_siz
 from keras import Sequential,layers, optimizers
 from keras import regularizers
 
-INPUT_SHAPE = (32, 32, 3) 
-KERNEL_SIZE = (3, 3)
+#INPUT_SHAPE = (32, 32, 3) 
+#KERNEL_SIZE = (3, 3)
 
 #relu verwendet um nichtlinearität zu erzeugen für cnn.
 #ReLU ist effizient und verhindert das Verschwinden des Gradienten, wodurch tiefe Netzwerke besser trainiert werden können.
-#convolutional layer
 
+'Knut Viet Thang Franke 878114'
+#convolutional layer
 #Hyperparameter: Komplexeres netz, anzahl neuronen pro schicht erhöht(besser für komplexe Beziehungen)
 
 model = Sequential([
