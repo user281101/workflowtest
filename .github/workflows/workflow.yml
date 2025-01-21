@@ -31,8 +31,8 @@ jobs:
 
       - name: Create directories
         run: |
-          mkdir -p data/plots
-          mkdir -p data/model
+          mkdir -p data/results/plots
+          mkdir -p data/results/model
 
       - name: Run data pipeline
         run: |
@@ -58,7 +58,7 @@ jobs:
           ls -R data/CNNCifar10Mock.py
    
       - name: Save generated plot
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: generated-plot
           path: data/results/plots/training_history.png
@@ -70,7 +70,7 @@ jobs:
           path: data/results/plots/confusion_matrix.png
 
       - name: Save model
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: model (test)
           path: data/results/model/cnn_cifar10.h5
