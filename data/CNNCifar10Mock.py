@@ -126,7 +126,7 @@ print(f"Test Accuracy: {test_acc:.2f}")
 y_pred = np.argmax(model.predict(x_test), axis=-1)
 
 
-def plot_confusion_matrix(model, x_test, y_test, save_dir='data/results/plots'):
+def plot_confusion_matrix(model, x_test, y_test, save_dir='data/plots'):
     """Plot and save the confusion matrix."""
 # Save the plot
     os.makedirs(save_dir, exist_ok=True)
