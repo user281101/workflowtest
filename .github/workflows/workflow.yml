@@ -56,13 +56,12 @@ jobs:
         run: |
           echo "Checking contetns of the directory"
           ls -R data/CNNCifar10Mock.py
-   
+   #ziel war es die plots und das modell zu speichern. Lief aber schief
       - name: Save generated plot
         uses: actions/upload-artifact@v4
         with:
           name: generated-plot
           path: data/plots/training_history.png
-
 
       - name: Save confusion matrix as png
         uses: actions/upload-artifact@v4
