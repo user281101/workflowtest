@@ -13,9 +13,8 @@ if tf.config.list_physical_devices('GPU'):
     print("Training läuft auf GPU!")
 else:
     print("Keine GPU verfügbar. Training läuft auf CPU.")
-##
-#zuerst testdaten aufsplitten dann skalieren um datenlecks zu vermeiden 
 
+#zuerst testdaten aufsplitten dann skalieren um datenlecks zu vermeiden 
 #testdatenaufteilung funktioniert
 (x_train, y_train), (x_test, y_test) = keras.datasets.cifar10.load_data()
 print('Training set shape:', x_train.shape) #anzeigen der datenverteilung für die übersicht
@@ -39,14 +38,11 @@ def visualize_cifar10_images(images, labels, class_names, num_images):
         plt.axis('off') 
     plt.tight_layout() 
     plt.show()
-
 visualize_cifar10_images(x_train, y_train, klassen, num_images=10)
 
 # Datenskalierung funktioniert
 x_train = x_train / 255.0
 x_test = x_test / 255.0
-
-
 #one hot encoding labels für nicht nötig gewesen dank SparseCategoricalCrossentropy
 
 #validation trainingset zum schauen wie die predictions sind ohne testset anzurühren
@@ -54,18 +50,15 @@ from sklearn.model_selection import train_test_split
 x_train, x_valid, y_train, y_valid = train_test_split(x_train, y_train, test_size=0.2, random_state = 42) #randomstate Datenaufteilung reproduzierbar
 #bisher:Datensatz laden, training_split ,visualisierung der Bilder und der Testdaten-Aufteilung,Datenskalierung, One hot encoding und validation Trainingsset erfolgreich
 
+'Knut Viet Thang Franke 878114'
 #3.modellaufbau und training
 from keras import Sequential,layers, optimizers
 from keras import regularizers
-
 INPUT_SHAPE = (32, 32, 3) 
 KERNEL_SIZE = (3, 3)
 #ReLu verwendet um nichtlinearität zu erzeugen für cnn. verhindert verschwinden von Gradienten.
-
-'Knut Viet Thang Franke 878114'
 #convolutional layer
 #Hyperparameter: Komplexeres netz, anzahl neuronen pro schicht erhöht(besser für komplexe Beziehungen)
-
 model = Sequential([
     #layer1
     keras.layers.Conv2D(32, (3, 3), padding= 'same',activation='relu', input_shape=(32, 32, 3)),
@@ -109,8 +102,7 @@ model.compile(optimizer = 'adam',
 # Training the model for 10 epochs, validierungsdaten genutzt um Datenlecks zu vermeiden
 #loss minimum bei eopche 4, early stoppage toleriert 3 eopchen ohne verbesserung danach setback auf den niedrigsten loss wert
 early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
-history = model.fit(x_train, y_train, epochs = 1, batch_size=64, validation_data=(x_valid, y_valid), callbacks=[early_stopping])
-
+history = model.fit(x_train, y_train, epochs = 50, batch_size=64, validation_data=(x_valid, y_valid), callbacks=[early_stopping])
 #Hyperparameter: batchsize und epochen erhöht = höhere accuracy
 
 #4 Evaluieren und Konfusionsmatrix
@@ -123,22 +115,9 @@ print(f"Test Accuracy: {test_acc:.2f}")
 # Vorhersagen generieren
 y_pred = np.argmax(model.predict(x_test), axis=-1)
 
-
-#konfusionsmatrix , zeigen wie gut das Modell die Klassen unterscheidet
-#ConfusionMatrixDisplay.from_predictions(y_test.flatten(), y_pred, display_labels=klassen)
-#plt.savefig("matrix_history.png")
-#plt.close()
-# Ensure the results directory exists
-output_dir = "data/plots"
-os.makedirs(output_dir, exist_ok=True)
-
 # Generate and save the confusion matrix
 ConfusionMatrixDisplay.from_predictions(y_test.flatten(), y_pred, display_labels=klassen)
-output_path = os.path.join(output_dir, "matrix_history.png")
-plt.savefig(output_path)
-plt.close()
-print(f"Confusion matrix saved at: {output_path}")
-
+plt.show()
 
 # Klassifikationsbericht für detaillierte Übersicht zur Modelleistung pro Klasse
 print("y_test:", y_test)
