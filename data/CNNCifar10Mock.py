@@ -6,7 +6,7 @@ import tensorflow as tf
 import keras
 import os
 
-'Knut Viet Thang'
+'Knut Viet Thang Franke'
 #tensorflow mit gpu installiert
 print("GPU verfügbar:", tf.config.list_physical_devices('GPU'))
 if tf.config.list_physical_devices('GPU'):
@@ -60,8 +60,7 @@ from keras import regularizers
 
 INPUT_SHAPE = (32, 32, 3) 
 KERNEL_SIZE = (3, 3)
-#relu verwendet um nichtlinearität zu erzeugen für cnn.
-#ReLU ist effizient und verhindert das Verschwinden des Gradienten, wodurch tiefe Netzwerke besser trainiert werden können.
+#ReLu verwendet um nichtlinearität zu erzeugen für cnn. verhindert verschwinden von Gradienten.
 
 'Knut Viet Thang Franke 878114'
 #convolutional layer
@@ -110,7 +109,7 @@ model.compile(optimizer = 'adam',
 # Training the model for 10 epochs, validierungsdaten genutzt um Datenlecks zu vermeiden
 #loss minimum bei eopche 4, early stoppage toleriert 3 eopchen ohne verbesserung danach setback auf den niedrigsten loss wert
 early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
-history = model.fit(x_train, y_train, epochs = 10, batch_size=64, validation_data=(x_valid, y_valid), callbacks=[early_stopping])
+history = model.fit(x_train, y_train, epochs = 1, batch_size=64, validation_data=(x_valid, y_valid), callbacks=[early_stopping])
 
 #Hyperparameter: batchsize und epochen erhöht = höhere accuracy
 
@@ -125,16 +124,21 @@ print(f"Test Accuracy: {test_acc:.2f}")
 y_pred = np.argmax(model.predict(x_test), axis=-1)
 
 
-def plot_confusion_matrix(model, x_test, y_test, save_dir='data/plots'):
-    """Plot and save the confusion matrix."""
-# Save the plot
-    os.makedirs(save_dir, exist_ok=True)
-    plot_path = os.path.join(save_dir, 'confusion_matrix.png')
-    plt.savefig(plot_path)
-    plt.show()
 #konfusionsmatrix , zeigen wie gut das Modell die Klassen unterscheidet
+#ConfusionMatrixDisplay.from_predictions(y_test.flatten(), y_pred, display_labels=klassen)
+#plt.savefig("matrix_history.png")
+#plt.close()
+# Ensure the results directory exists
+output_dir = "data/result"
+os.makedirs(output_dir, exist_ok=True)
+
+# Generate and save the confusion matrix
 ConfusionMatrixDisplay.from_predictions(y_test.flatten(), y_pred, display_labels=klassen)
-plt.show()
+output_path = os.path.join(output_dir, "matrix_history.png")
+plt.savefig(output_path)
+plt.close()
+print(f"Confusion matrix saved at: {output_path}")
+
 
 # Klassifikationsbericht für detaillierte Übersicht zur Modelleistung pro Klasse
 print("y_test:", y_test)
@@ -171,4 +175,4 @@ for i, index in enumerate(misclassified_indices[:9]):
     plt.title(f"True: {klassen[y_test[index][0]]}, Pred: {klassen[y_pred[index]]}")
     plt.axis('off')
 plt.tight_layout()
-plt.show() 
+plt.show()
