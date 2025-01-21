@@ -58,9 +58,8 @@ x_train, x_valid, y_train, y_valid = train_test_split(x_train, y_train, test_siz
 from keras import Sequential,layers, optimizers
 from keras import regularizers
 
-#INPUT_SHAPE = (32, 32, 3) 
-#KERNEL_SIZE = (3, 3)
-
+INPUT_SHAPE = (32, 32, 3) 
+KERNEL_SIZE = (3, 3)
 #relu verwendet um nichtlinearität zu erzeugen für cnn.
 #ReLU ist effizient und verhindert das Verschwinden des Gradienten, wodurch tiefe Netzwerke besser trainiert werden können.
 
@@ -127,7 +126,7 @@ print(f"Test Accuracy: {test_acc:.2f}")
 y_pred = np.argmax(model.predict(x_test), axis=-1)
 
 
-def plot_confusion_matrix(model, x_test, y_test, save_dir='data/plots'):
+def plot_confusion_matrix(model, x_test, y_test, save_dir='data/results/plots'):
     """Plot and save the confusion matrix."""
 # Save the plot
     os.makedirs(save_dir, exist_ok=True)
