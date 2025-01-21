@@ -67,7 +67,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: confusion-matrix
-          path: data/result/matrix_history.png
+          path: data/plots/matrix_history.png
 
       - name: Save model
         uses: actions/upload-artifact@v4
