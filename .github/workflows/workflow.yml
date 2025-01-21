@@ -73,4 +73,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: model (test)
-          path: data/results/model/cnn_cifar10.h5
+          path: data/model/cnn_cifar10.h5
