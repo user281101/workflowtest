@@ -160,7 +160,7 @@ plt.legend()
 plt.savefig("training_history.png")
 plt.close()
 
-#Darstellung falsch klassifizierter Bilder , von chatgpt
+#Darstellung falsch klassifizierter Bilder , von chatgpt #
 misclassified_indices = np.where(y_test.flatten() != y_pred)[0]
 plt.figure(figsize=(12, 12))
 for i, index in enumerate(misclassified_indices[:9]):
