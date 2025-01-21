@@ -63,15 +63,13 @@ jobs:
           name: generated-plot
           path: data/plots/training_history.png
 
-<<<<<<< HEAD
+
       - name: Save confusion matrix as png
         uses: actions/upload-artifact@v4
         with:
           name: confusion-matrix
           path: data/plots/matrix_history.png
 
-=======
->>>>>>> fa380a5 (hi)
       - name: Save model
         uses: actions/upload-artifact@v4
         with:
