@@ -105,8 +105,7 @@ model = Sequential([
 #learning rate mit einbauen für Hyperparameter tuning
 model.compile(optimizer = 'adam',
               loss=keras.losses.SparseCategoricalCrossentropy(from_logits=False),
-              metrics=['accuracy'])  #Logits = vorhergesagte Wahrscheinlichkeiten
-#modellausgabe sind bereits Wahrscheinlichkeiten 
+              metrics=['accuracy'])  
 
 # Training the model for 10 epochs, validierungsdaten genutzt um Datenlecks zu vermeiden
 #loss minimum bei eopche 4, early stoppage toleriert 3 eopchen ohne verbesserung danach setback auf den niedrigsten loss wert
